@@ -80,7 +80,7 @@ module CountVonCount
     end
 
 
-    def to_hash
+    def to_h
       {all: all, loc: loc, methods: methods, modules: modules, classes: classes, comments: comments}
     end
 

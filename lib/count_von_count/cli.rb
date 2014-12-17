@@ -15,7 +15,7 @@ module CountVonCount
       And tests in:
         - spec/**/*_spec.rb
 
-      If you don't want to include these paths, you can pass --no_default and add custom paths
+      If you don't want to include these paths, you can pass --no_default and add a list of custom paths
       using `-c` for code paths and `-t` for test paths. These paths are given relative to the project
       directory.
 
@@ -25,14 +25,14 @@ module CountVonCount
       it will end up in a file called results.txt (or whatever format you choose)
     DESC
 
-    option :code, type: :string, aliases: :c, desc: "Add a relative code path to count"
-    option :test, type: :string, aliases: :t, desc: "Add a relateive test path to count"
+    option :code, type: :array, aliases: :c, desc: "A list of relative code paths to include"
+    option :test, type: :array, aliases: :t, desc: "A list of relative test paths to include"
     option :no_default, type: :boolean, aliases: :n, desc: "Don't include default paths", default: false
     option :format, type: :string, aliases: :f, desc: "The format to output to, valid are yaml,json,txt", default: "txt"
     option :outout, type: :string, aliases: :o, desc: "A directory to write the results to"
 
     def count(path="./")
-      CountVonCount.new(path, options[:code], options[:test], options[:no_default], options[:format], options[:output])
+      CountVonCount.new(path, options[:code], options[:test], options[:no_default], options[:format], options[:output]).run
     end
 
     default_task :count

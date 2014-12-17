@@ -15,7 +15,7 @@ module CountVonCount
 
   def self.default_code_paths
     return [
-      "app/**/*",
+      "app/**/*.rb",
       "lib/**/*.rb"
     ]
   end

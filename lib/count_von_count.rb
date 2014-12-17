@@ -1,7 +1,9 @@
 require 'pathname'
+require_relative "count_von_count/counter"
+require_relative "count_von_count/stat"
 require_relative "count_von_count/formatter"
 module CountVonCount
-  def self.new(path, code_paths=[], test_paths=[], no_default=false, format=:txt, output)
+  def self.new(path, code_paths=[], test_paths=[], no_default=false, format=:txt, output = nil)
     path = Pathname.new(path)
     unless no_default
       code_paths = default_code_paths + code_paths
@@ -13,14 +15,14 @@ module CountVonCount
 
   def self.default_code_paths
     return [
-      "app/**/*.rb"
+      "app/**/*",
       "lib/**/*.rb"
     ]
   end
 
   def self.default_test_paths
     return [
-      "test/**/*_spec.rb"
+      "spec/**/*_spec.rb"
     ]
   end
 

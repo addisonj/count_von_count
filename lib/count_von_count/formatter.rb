@@ -1,5 +1,7 @@
+require "yaml"
+require "json"
 module CountVonCount
-  module Formatter
+  module Formatters
     class Base
       attr_reader :path
       attr_reader :output_dir
@@ -35,3 +37,30 @@ module CountVonCount
         raise 'Must extend this method'
       end
     end
+    class Text < Base
+      def extension
+        "txt"
+      end
+      def serialize(countObj)
+        # cheat for now
+        countObj.to_yaml
+      end
+    end
+    class Json < Base
+      def extension
+        "json"
+      end
+      def serialize(countObj)
+        countObj.to_json
+      end
+    end
+    class Yaml < Base
+      def extension
+        "yaml"
+      end
+      def serialize(countObj)
+        countObj.to_yaml
+      end
+    end
+  end
+end

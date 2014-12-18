@@ -10,9 +10,11 @@ module CountVonCount
       By default, when you point to a project, it will count all the code in default set of directories:
 
         - app/**/*.rb
+
         - lib/**/*.rb
 
       And tests in:
+
         - spec/**/*_spec.rb
 
       If you don't want to include these paths, you can pass --no_default and add a list of custom paths
@@ -23,6 +25,7 @@ module CountVonCount
 
       If you want to write the files out to a directory (instead of stdout), pass -o with a path and
       it will end up in a file called results.txt (or whatever format you choose)
+
     DESC
 
     option :code, type: :array, aliases: :c, desc: "A list of relative code paths to include"

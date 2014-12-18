@@ -1,5 +1,6 @@
 require "yaml"
 require "json"
+require "terminal-table"
 module CountVonCount
   module Formatters
     class Base
@@ -43,8 +44,24 @@ module CountVonCount
         "txt"
       end
       def serialize(countObj)
-        # cheat for now
-        countObj.to_yaml
+        output = build_table("Code", countObj[:code]).to_s
+        output += "\n\n"
+        output += build_table("Tests", countObj[:tests]).to_s
+        output
+      end
+      def build_table(name, countObj)
+        head = [""] + countObj[:total].keys.map(&:to_s)
+        rows = []
+        rows << ["total"] + countObj[:total].values
+        rows << :separator
+        rows << [{value: "By Dir", colspan: 7, align: :center}]
+        rows << :separator
+        rows.push *countObj[:by_dir].map{ |d, v| [d] + v.values }
+        rows << :separator
+        rows << [{value: "By File", colspan: 7, align: :center}]
+        rows << :separator
+        rows.push *countObj[:by_file].map{ |f, v| [f] + v.values }
+        Terminal::Table.new title: name, headings: head, rows: rows
       end
     end
     class Json < Base

@@ -17,6 +17,12 @@ Gem::Specification.new do |s|
 
 
   s.add_dependency 'thor'
-  s.add_dependency 'code_metrics'
+
+  s.add_development_dependency "bundler", "~> 1.6"
+  s.add_development_dependency "rake"
+  s.add_development_dependency "pry"
+  s.add_development_dependency "rs"
+  s.add_development_dependency "simplecov"
+
   s.license = 'MIT'
 end

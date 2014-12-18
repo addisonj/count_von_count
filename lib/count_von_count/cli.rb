@@ -28,11 +28,11 @@ module CountVonCount
     option :code, type: :array, aliases: :c, desc: "A list of relative code paths to include"
     option :test, type: :array, aliases: :t, desc: "A list of relative test paths to include"
     option :no_default, type: :boolean, aliases: :n, desc: "Don't include default paths", default: false
-    option :format, type: :string, aliases: :f, desc: "The format to output to, valid are yaml,json,txt", default: "txt"
+    option :format, type: :string, aliases: :f, desc: "The format to output to, valid are yaml,json,txt", default: :txt
     option :outout, type: :string, aliases: :o, desc: "A directory to write the results to"
 
-    def count(path="./")
-      CountVonCount.new(path, options[:code], options[:test], options[:no_default], options[:format], options[:output]).run
+    def count(path=Dir.pwd)
+      CountVonCount.new(path, options[:code], options[:test], options[:no_default], options[:format].to_sym, options[:output]).run
     end
 
     default_task :count

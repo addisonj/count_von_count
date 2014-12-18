@@ -7,6 +7,7 @@ module CountVonCount
       @path = path
       @formatter = formatter
       @code_paths = expand_globs(code_paths)
+      raise "No files found in globs" if @code_paths.empty?
       @test_paths = expand_globs(test_paths)
     end
 
@@ -18,12 +19,10 @@ module CountVonCount
       end
     end
 
-
     def run
-      results = {
-        code: process_files(code_paths),
-        tests: process_files(test_paths)
-      }
+      results = {}
+      results[:code] = process_files(code_paths)
+      results[:tests] = process_files(test_paths) unless test_paths.empty?
       formatter.write_output(results)
     end
 

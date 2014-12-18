@@ -19,6 +19,7 @@ module CountVonCount
         end
       end
 
+      private
       def write_file(formatted)
         output_file = path.join(output_dir).join("results.#{extension}")
         output_file.open("w") do |f|

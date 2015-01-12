@@ -46,7 +46,7 @@ module CountVonCount
       def serialize(countObj)
         output = build_table("Code", countObj[:code]).to_s
         output += "\n\n"
-        output += build_table("Tests", countObj[:tests]).to_s
+        output += build_table("Tests", countObj[:tests]).to_s if countObj[:tests]
         output
       end
       def build_table(name, countObj)
